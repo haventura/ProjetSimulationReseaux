@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProjetSimulationReseaux.ControlCenter">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAggQAECAAAAAIAASAAAACAAEDMQgAAAgQQgBQQAA=</HashCode>
+      <FileName>ControlCenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Fuel">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAAiAAAAAAAAAAAAAAJABAAAQAABAAAAAAA=</HashCode>
+      <FileName>Fuel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Coal">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Fuel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Gas">
+    <Position X="2.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Fuel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Uranium">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Fuel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Grid">
+    <Position X="23" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgAAAAAAAAAAAEECSAAAgEAIQAAAAEABDMkAA=</HashCode>
+      <FileName>Grid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Consumer">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAACAg=</HashCode>
+      <FileName>Items\Consumer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.City">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Consumer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Factory">
+    <Position X="5.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Consumer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Junction">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Junction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.ConcentrationJunction">
+    <Position X="13.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Junction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.DistributionJunction">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Junction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Node">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQKAAAIAAABAACMAAIAAAQEAAABAIBAEAAAAAQAgAA=</HashCode>
+      <FileName>Items\Node.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Plant">
+    <Position X="9.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAEBAAAAAQAAggAAEAAAAAAAAAA=</HashCode>
+      <FileName>Items\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.DirtyPlant">
+    <Position X="7.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAIKAAAQAAAAEAAAAAAAAAAAAQIwAEEgAAIAA=</HashCode>
+      <FileName>Items\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.GreenPlant">
+    <Position X="11.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.CoalPlant">
+    <Position X="5.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.GasPlant">
+    <Position X="5.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.UraniumPlant">
+    <Position X="5.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.WindFarm">
+    <Position X="11.25" Y="7.75" Width="1.5" />
+    <InheritanceLine Type="ProjetSimulationReseaux.GreenPlant" FixedToPoint="true">
+      <Path>
+        <Point X="12" Y="7.175" />
+        <Point X="12" Y="7.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.SolarFarm">
+    <Position X="13.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.PowerLine">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAAAAAAAAEAAQAEAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Items\PowerLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Program">
+    <Position X="25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Properties.Resources" Collapsed="true">
+    <Position X="24.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetSimulationReseaux.Properties.Settings" Collapsed="true">
+    <Position X="24.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ProjetSimulationReseaux.IMarket">
+    <Position X="16.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAIABAAAQAABAAAAAAA=</HashCode>
+      <FileName>Interfaces\IMarket.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ProjetSimulationReseaux.IWeather">
+    <Position X="18.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAIAAAAAAAAAAABAIBAEAAAAAQAAAA=</HashCode>
+      <FileName>Interfaces\IWeather.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
