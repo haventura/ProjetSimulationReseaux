@@ -51,10 +51,10 @@
     <Compile Include="Hsv.cs" />
     <Compile Include="Interfaces\IMarket.cs" />
     <Compile Include="Interfaces\IWeather.cs" />
-    <Compile Include="Items\Node.cs" />
-    <Compile Include="Items\Junction.cs" />
+    <Compile Include="Nodes\Node.cs" />
+    <Compile Include="Nodes\Junction.cs" />
     <Compile Include="Grid.cs" />
-    <Compile Include="Items\Consumer.cs" />
+    <Compile Include="Nodes\Consumer.cs" />
     <Compile Include="ControlCenter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,8 +62,8 @@
       <DependentUpon>ControlCenter.cs</DependentUpon>
     </Compile>
     <Compile Include="Fuel.cs" />
-    <Compile Include="Items\Plant.cs" />
-    <Compile Include="Items\PowerLine.cs" />
+    <Compile Include="Nodes\Plant.cs" />
+    <Compile Include="Nodes\PowerLine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ControlCenter.resx">
