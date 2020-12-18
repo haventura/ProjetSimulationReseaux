@@ -18,7 +18,7 @@ namespace ProjetSimulationReseaux
         public int TotalPwProduction;
         public int TotalPwRequest;
         public int PwDeficit;
-        public int TotalOperatingCost;
+        public double TotalOperatingCost;
         public double TotalCO2Emission;
 
         public int TimePassed = 0;
@@ -69,6 +69,7 @@ namespace ProjetSimulationReseaux
             TotalPwProduction = 0;
             TotalPwRequest = 0;
             TotalCO2Emission = 0;
+            TotalOperatingCost = 0;
             foreach (Consumer consumer in List_Node.OfType<Consumer>())
             {
                 consumer.Update(TimePassed);
@@ -80,6 +81,7 @@ namespace ProjetSimulationReseaux
                 greenPlant.Update(TimePassed);
                 TotalPwProduction += greenPlant.PwProduction;
                 PwDeficit -= greenPlant.PwProduction;
+                TotalOperatingCost += greenPlant.OperatingCost;
             }
             foreach (DirtyPlant dirtyPlant in List_Node.OfType<DirtyPlant>())
             {
@@ -105,6 +107,7 @@ namespace ProjetSimulationReseaux
                 TotalPwProduction += dirtyPlant.PwProduction;
                 PwDeficit -= dirtyPlant.PwProduction;
                 TotalCO2Emission += dirtyPlant.CO2Emission;
+                TotalOperatingCost += dirtyPlant.OperatingCost;
             }
             /*
             foreach (Node node in List_Node)

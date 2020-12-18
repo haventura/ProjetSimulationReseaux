@@ -103,8 +103,15 @@ namespace ProjetSimulationReseaux
             FuelConsumption = PwProduction / Fuel.PwDensity;
         }
         private void UpdateOperatingCost()
-        {
-            OperatingCost = FuelConsumption * Fuel.CurrentPrice;
+        {         
+            if (IsOn)
+            {
+                OperatingCost = FlatOperatingCost + (FuelConsumption * Fuel.CurrentPrice);
+            }
+            else
+            {
+                OperatingCost = 0;
+            }
         }
         private void UpdateCO2Emission()
         {
@@ -121,6 +128,18 @@ namespace ProjetSimulationReseaux
         {
             UpdateWeather(timePassed);
             UpdatePwProduction();
+            UpdateOperatingCost();
+        }
+        private void UpdateOperatingCost()
+        {
+            if (IsOn)
+            {
+                OperatingCost = FlatOperatingCost;
+            }
+            else
+            {
+                OperatingCost = 0;
+            }
         }
     }
 
@@ -131,7 +150,7 @@ namespace ProjetSimulationReseaux
             MaxInput = 0;
             MaxOutput = 1;
 
-            RampingCapabilityPercent = 0.1;
+            RampingCapabilityPercent = 0.02;
             RampingCapabilityMW = (int)(RampingCapabilityPercent * (MaxPwProduction - MinPwProduction));
             ColdStartTime = 2;
             FlatOperatingCost = 500;
@@ -143,7 +162,7 @@ namespace ProjetSimulationReseaux
     {
         public GasPlant(string name, int minPwProduction, int maxPwProduction, Gas fuel, Point location) : base(name, minPwProduction, maxPwProduction, fuel, location)
         {
-            RampingCapabilityPercent = 0.2;
+            RampingCapabilityPercent = 0.04;
             RampingCapabilityMW = (int)(RampingCapabilityPercent * (MaxPwProduction - MinPwProduction));
             ColdStartTime = 3;
             FlatOperatingCost = 700;
@@ -154,7 +173,7 @@ namespace ProjetSimulationReseaux
     {
         public UraniumPlant(string name, int minPwProduction, int maxPwProduction, Uranium fuel, Point location) : base(name, minPwProduction, maxPwProduction, fuel, location)
         {
-            RampingCapabilityPercent = 0.03;
+            RampingCapabilityPercent = 0.005;
             RampingCapabilityMW = (int)(RampingCapabilityPercent * (MaxPwProduction - MinPwProduction));
             ColdStartTime = 6;
             FlatOperatingCost = 1500;
@@ -165,7 +184,7 @@ namespace ProjetSimulationReseaux
     {
         public WindFarm(string name, int maxPwProduction,Point location) : base(name, maxPwProduction, location)
         {
-            
+            FlatOperatingCost = 300;
         }
         public override void UpdatePwProduction()
         {
@@ -176,7 +195,7 @@ namespace ProjetSimulationReseaux
     {
         public SolarFarm(string name, int maxPwProduction, Point location) : base(name, maxPwProduction, location)
         {
-
+            FlatOperatingCost = 400;
         }
         public override void UpdatePwProduction()
         {
