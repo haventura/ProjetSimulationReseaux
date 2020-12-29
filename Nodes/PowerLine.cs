@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace ProjetSimulationReseaux
 {
@@ -23,8 +18,8 @@ namespace ProjetSimulationReseaux
 
         public void Update(int timePassed)
         {
-
         }
+
         public override string ToString()
         {
             return "PowerLine " + StartLocation.ToString() + "-" + EndLocation.ToString();

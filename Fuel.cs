@@ -1,54 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetSimulationReseaux
 {
-
     public abstract class Fuel : IMarket
     {
-
-        public double BasePrice;    //$/uF
+        internal double BasePrice;    //$/uF
+        public string Name;
         public double CurrentPrice; //$/uF
         public double PwDensity;    //MW/uF
         public double CO2Density;   //CO2/uF
+        private static readonly Random Random = new Random();
 
-        public Random Random { get; set; }
         public double RandomValue { get; set; }
         public double PriceFactor { get; set; } = 1;
-        public Fuel()
-        {
 
+        public Fuel(string name)
+        {
+            Name = name;
         }
 
         public void RandomizePriceFactor()
         {
             RandomValue = Random.NextDouble();
-            if(RandomValue >= 0.5)
+            if (RandomValue >= 0.5)
             {
-                PriceFactor += RandomValue-0.5 / 10;
+                PriceFactor += (RandomValue - 0.5) / 20;
+                if (PriceFactor > 4)
+                {
+                    PriceFactor = 4;
+                }
             }
             else
             {
-                PriceFactor -= RandomValue / 10;
+                PriceFactor -= RandomValue / 20;
+                if (PriceFactor < 0.25)
+                {
+                    PriceFactor = 0.2;
+                }
             }
         }
 
         public void Update(int timePassed)
-        {
-            UpdatePrice();
+        {          
+            UpdatePrice(timePassed);
         }
 
-        public void UpdatePrice()
+        public void UpdatePrice(int timePassed)
         {
+            RandomizePriceFactor();
             CurrentPrice = BasePrice * PriceFactor;
         }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
+
     public class Coal : Fuel
     {
-        public Coal()
+        public Coal(string name) : base(name)
         {
             BasePrice = 1;      //$/uF
             CurrentPrice = 0;       //$/uF
@@ -56,9 +66,10 @@ namespace ProjetSimulationReseaux
             CO2Density = 3;   //CO2/uF
         }
     }
+
     public class Gas : Fuel
     {
-        public Gas()
+        public Gas(string name) : base(name)
         {
             BasePrice = 2.5;      //$/uF
             CurrentPrice = 0;       //$/uF
@@ -66,9 +77,10 @@ namespace ProjetSimulationReseaux
             CO2Density = 1;   //CO2/uF
         }
     }
+
     public class Uranium : Fuel
     {
-        public Uranium()
+        public Uranium(string name) : base(name)
         {
             BasePrice = 150;      //$/uF
             CurrentPrice = 0;       //$/uF

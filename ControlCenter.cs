@@ -1,37 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ProjetSimulationReseaux
 {
+    /// <summary>
+    /// A Graphical UI that takes a Grid object as parameters.
+    /// Displays various information about said Grid in a windows Form window,
+    /// including the location of plants/consumers, graphs of production/consumption
+    /// and various data about the nodes of the Grid.
+    /// Only used to update the Grid object and display the data,
+    /// doesn't compute any data itself.
+    /// Inherit from the Form Object.
+    /// </summary>
     public partial class ControlCenter : Form
     {
-        Grid Grid;
-        int PBXFactor;
-        int PBYFactor;
+        private readonly Grid Grid;
+        private readonly int PBXFactor;
+        private readonly int PBYFactor;
 
-        int PlantSizeX;
-        int PlantSizeY;
-        int ConsumerSizeX;
-        int ConsumerSizeY;
-        int NodeSizeX;
-        int NodeSizeY;
-        int PowerLineWidth;     
-        int GridDotSizeX;
-        int GridDotSizeY;
-
+        private readonly int PlantSizeX;
+        private readonly int PlantSizeY;
+        private readonly int ConsumerSizeX;
+        private readonly int ConsumerSizeY;
+        private readonly int NodeSizeX;
+        private readonly int NodeSizeY;
+        private readonly int PowerLineWidth;
+        private readonly int GridDotSizeX;
+        private readonly int GridDotSizeY;
 
         public ControlCenter(Grid grid)
         {
             Grid = grid;
-            
+
             InitializeComponent();
             PBXFactor = PictureBoxGrid.Width / Grid.SizeX;
             PBYFactor = PictureBoxGrid.Height / Grid.SizeY;
@@ -43,17 +46,19 @@ namespace ProjetSimulationReseaux
             NodeSizeY = PBYFactor / 5;
             PowerLineWidth = PBXFactor / 10;
             GridDotSizeX = PBXFactor / 15;
-            GridDotSizeY = PBYFactor / 15;          
+            GridDotSizeY = PBYFactor / 15;
         }
-        private void timer1_Tick(object sender, EventArgs e)
-        {   
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
             Grid.Update();
             UpdateAllChart();
             UpdateAllLabel();
-            
+
             Update();
         }
-        void UpdateAllChart()
+
+        private void UpdateAllChart()
         {
             if (Grid.TimePassed > 200)
             {
@@ -88,14 +93,15 @@ namespace ProjetSimulationReseaux
             ChartTotal.ResetAutoValues();
             ChartNode.ResetAutoValues();
         }
-        void UpdateAllLabel()
+
+        private void UpdateAllLabel()
         {
             int i = 0;
-            
+
             foreach (Plant plant in Grid.List_Node.OfType<Plant>())
             {
                 groupBoxPlantProduction.Controls[i].Text = plant.PwProduction.ToString() + " / " + plant.MaxPwProduction.ToString() + " MW";
-                if(plant.IsOn)
+                if (plant.IsOn)
                 {
                     groupBoxPlantState.Controls[i].Text = "On";
                     groupBoxPlantState.Controls[i].BackColor = Color.Green;
@@ -113,6 +119,12 @@ namespace ProjetSimulationReseaux
                 groupBoxConsumerRequest.Controls[i].Text = consumer.PwRequest.ToString() + " MW";
                 i += 1;
             }
+            i = 0;
+            foreach (Fuel fuel in Grid.List_Fuel)
+            {
+                groupBoxFuelPrice.Controls[i].Text = fuel.CurrentPrice.ToString("C");
+                i += 1;
+            }
         }
 
         private void ControlCenter_Load(object sender, EventArgs e)
@@ -122,7 +134,7 @@ namespace ProjetSimulationReseaux
             AddCheckBoxInfoTable();
             AddLabelInfoMap();
             FillChartNode();
-            foreach(ChartArea chartArea in ChartNode.ChartAreas)
+            foreach (ChartArea chartArea in ChartNode.ChartAreas)
             {
                 chartArea.AxisX.Maximum = 200;
             }
@@ -134,38 +146,46 @@ namespace ProjetSimulationReseaux
 
         private void DrawAll()
         {
-            PictureBoxGrid.Paint += new PaintEventHandler(pictureBox1_PaintEdge);
-            PictureBoxGrid.Paint += new PaintEventHandler(pictureBox1_PaintBaseGrid);
-            PictureBoxGrid.Paint += new PaintEventHandler(pictureBox1_PaintPowerLine);
-            PictureBoxGrid.Paint += new PaintEventHandler(pictureBox1_PaintNode);          
+            PictureBoxGrid.Paint += new PaintEventHandler(PictureBox1_PaintEdge);
+            PictureBoxGrid.Paint += new PaintEventHandler(PictureBox1_PaintBaseGrid);
+            PictureBoxGrid.Paint += new PaintEventHandler(PictureBox1_PaintPowerLine);
+            PictureBoxGrid.Paint += new PaintEventHandler(PictureBox1_PaintNode);
         }
 
         private void AddLabelInfoTable()
         {
             int PlantTotalCount = Grid.List_Node.OfType<Plant>().Count();
             int ConsumerTotalCount = Grid.List_Node.OfType<Consumer>().Count();
+            int FuelTotalCount = Grid.List_Fuel.Count();
             Label[] LabelsInfoTablePlantsName = new Label[PlantTotalCount];
             Label[] LabelsInfoTablePlantsProduction = new Label[PlantTotalCount];
             Label[] LabelsInfoTablePlantsState = new Label[PlantTotalCount];
             Label[] LabelsInfoTableConsumerName = new Label[ConsumerTotalCount];
             Label[] LabelsInfoTableConsumerRequest = new Label[ConsumerTotalCount];
+            Label[] LabelsInfoTableFuelName = new Label[FuelTotalCount];
+            Label[] LabelsInfoTableFuelPrice = new Label[FuelTotalCount];
             int PlantCurrentCount = 0;
             int ConsumerCurrentCount = 0;
-            
-            foreach(Plant plant in Grid.List_Node.OfType<Plant>())
+            int FuelCurrentCount = 0;
+
+            foreach (Plant plant in Grid.List_Node.OfType<Plant>())
             {
-                LabelsInfoTablePlantsName[PlantCurrentCount] = new Label();
-                LabelsInfoTablePlantsName[PlantCurrentCount].AutoSize = true;
-                LabelsInfoTablePlantsName[PlantCurrentCount].Text = plant.ToString();
-                LabelsInfoTablePlantsName[PlantCurrentCount].Location = new Point(5, 10 + 16 * PlantCurrentCount);
-                groupBoxPlantName.Controls.Add(LabelsInfoTablePlantsName[PlantCurrentCount]);
-                LabelsInfoTablePlantsProduction[PlantCurrentCount] = new Label();
-                LabelsInfoTablePlantsProduction[PlantCurrentCount].AutoSize = true;
-                LabelsInfoTablePlantsProduction[PlantCurrentCount].Text = plant.PwProduction.ToString() + " / " + plant.MaxPwProduction.ToString() + " MW";
-                LabelsInfoTablePlantsProduction[PlantCurrentCount].Location = new Point(5, 10 + 16 * PlantCurrentCount);
-                groupBoxPlantProduction.Controls.Add(LabelsInfoTablePlantsProduction[PlantCurrentCount]);
-                LabelsInfoTablePlantsState[PlantCurrentCount] = new Label();
-                LabelsInfoTablePlantsState[PlantCurrentCount].AutoSize = true;
+                LabelsInfoTablePlantsName[PlantCurrentCount] = new Label
+                {
+                    AutoSize = true,
+                    Text = plant.ToString(),
+                    Location = new Point(5, 10 + 16 * PlantCurrentCount)
+                };
+                LabelsInfoTablePlantsProduction[PlantCurrentCount] = new Label
+                {
+                    AutoSize = true,
+                    Text = plant.PwProduction.ToString() + " / " + plant.MaxPwProduction.ToString() + " MW",
+                    Location = new Point(5, 10 + 16 * PlantCurrentCount)
+                };
+                LabelsInfoTablePlantsState[PlantCurrentCount] = new Label
+                {
+                    AutoSize = true
+                };
                 if (plant.IsOn)
                 {
                     LabelsInfoTablePlantsState[PlantCurrentCount].Text = "On";
@@ -177,24 +197,51 @@ namespace ProjetSimulationReseaux
                     LabelsInfoTablePlantsState[PlantCurrentCount].BackColor = Color.Red;
                 }
                 LabelsInfoTablePlantsState[PlantCurrentCount].Location = new Point(5, 10 + 16 * PlantCurrentCount);
+                groupBoxPlantName.Controls.Add(LabelsInfoTablePlantsName[PlantCurrentCount]);
+                groupBoxPlantProduction.Controls.Add(LabelsInfoTablePlantsProduction[PlantCurrentCount]);
                 groupBoxPlantState.Controls.Add(LabelsInfoTablePlantsState[PlantCurrentCount]);
                 PlantCurrentCount += 1;
             }
             foreach (Consumer consumer in Grid.List_Node.OfType<Consumer>())
             {
-                LabelsInfoTableConsumerName[ConsumerCurrentCount] = new Label();
-                LabelsInfoTableConsumerName[ConsumerCurrentCount].AutoSize = true;
-                LabelsInfoTableConsumerName[ConsumerCurrentCount].Text = consumer.ToString();
-                LabelsInfoTableConsumerName[ConsumerCurrentCount].Location = new Point(5, 10 + 16 * ConsumerCurrentCount);
+                LabelsInfoTableConsumerName[ConsumerCurrentCount] = new Label
+                {
+                    AutoSize = true,
+                    Text = consumer.ToString(),
+                    Location = new Point(5, 10 + 16 * ConsumerCurrentCount)
+                };
+
+                LabelsInfoTableConsumerRequest[ConsumerCurrentCount] = new Label
+                {
+                    AutoSize = true,
+                    Text = consumer.PwRequest.ToString() + " MW",
+                    Location = new Point(5, 10 + 16 * ConsumerCurrentCount)
+                };
                 groupBoxConsumerName.Controls.Add(LabelsInfoTableConsumerName[ConsumerCurrentCount]);
-                LabelsInfoTableConsumerRequest[ConsumerCurrentCount] = new Label();
-                LabelsInfoTableConsumerRequest[ConsumerCurrentCount].AutoSize = true;
-                LabelsInfoTableConsumerRequest[ConsumerCurrentCount].Text = consumer.PwRequest.ToString() + " MW";
-                LabelsInfoTableConsumerRequest[ConsumerCurrentCount].Location = new Point(5, 10 + 16 * ConsumerCurrentCount);
                 groupBoxConsumerRequest.Controls.Add(LabelsInfoTableConsumerRequest[ConsumerCurrentCount]);
                 ConsumerCurrentCount += 1;
             }
+            foreach (Fuel fuel in Grid.List_Fuel)
+            {
+                LabelsInfoTableFuelName[FuelCurrentCount] = new Label
+                {
+                    AutoSize = true,
+                    Text = fuel.ToString(),
+                    Location = new Point(5, 10 + 16 * FuelCurrentCount)
+                };
+
+                LabelsInfoTableFuelPrice[FuelCurrentCount] = new Label
+                {
+                    AutoSize = true,
+                    Text = fuel.CurrentPrice.ToString() + " $",
+                    Location = new Point(5, 10 + 16 * FuelCurrentCount)
+                };
+                groupBoxFuelLabel.Controls.Add(LabelsInfoTableFuelName[FuelCurrentCount]);
+                groupBoxFuelPrice.Controls.Add(LabelsInfoTableFuelPrice[FuelCurrentCount]);
+                FuelCurrentCount += 1;
+            }
         }
+
         private void AddCheckBoxInfoTable()
         {
             int PlantTotalCount = Grid.List_Node.OfType<Plant>().Count();
@@ -206,28 +253,32 @@ namespace ProjetSimulationReseaux
 
             foreach (Plant plant in Grid.List_Node.OfType<Plant>())
             {
-                CheckBoxPlant[PlantCurrentCount] = new CheckBox();
-                CheckBoxPlant[PlantCurrentCount].Size = new Size(15, 15);
-                CheckBoxPlant[PlantCurrentCount].Checked = true;
-                CheckBoxPlant[PlantCurrentCount].AccessibleName = plant.ToString();
+                CheckBoxPlant[PlantCurrentCount] = new CheckBox
+                {
+                    Size = new Size(15, 15),
+                    Checked = true,
+                    AccessibleName = plant.ToString()
+                };
                 CheckBoxPlant[PlantCurrentCount].CheckStateChanged += new EventHandler(CheckBoxChart);
-                //CheckBoxPlant[PlantCurrentCount].CheckedChanged = true;
                 CheckBoxPlant[PlantCurrentCount].Location = new Point(1, 10 + 16 * PlantCurrentCount);
                 groupBoxCheckBoxPlant.Controls.Add(CheckBoxPlant[PlantCurrentCount]);
                 PlantCurrentCount += 1;
             }
             foreach (Consumer consumer in Grid.List_Node.OfType<Consumer>())
             {
-                CheckBoxConsumer[ConsumerCurrentCount] = new CheckBox();
-                CheckBoxConsumer[ConsumerCurrentCount].Size = new Size(15, 15);
-                CheckBoxConsumer[ConsumerCurrentCount].Checked = true;
-                CheckBoxConsumer[ConsumerCurrentCount].AccessibleName = consumer.ToString();
+                CheckBoxConsumer[ConsumerCurrentCount] = new CheckBox
+                {
+                    Size = new Size(15, 15),
+                    Checked = true,
+                    AccessibleName = consumer.ToString()
+                };
                 CheckBoxConsumer[ConsumerCurrentCount].CheckStateChanged += new EventHandler(CheckBoxChart);
                 CheckBoxConsumer[ConsumerCurrentCount].Location = new Point(1, 10 + 16 * ConsumerCurrentCount);
                 groupBoxCheckBoxConsumer.Controls.Add(CheckBoxConsumer[ConsumerCurrentCount]);
                 ConsumerCurrentCount += 1;
             }
         }
+
         private void AddLabelInfoMap()
         {
             int m = Grid.List_Node.Count;
@@ -235,11 +286,13 @@ namespace ProjetSimulationReseaux
 
             for (int i = 0; i < m; i++)
             {
-                LabelsInfoMap[i] = new Label();
-                LabelsInfoMap[i].AutoSize = true;
-                LabelsInfoMap[i].BackColor = Color.Transparent;
-                LabelsInfoMap[i].Text = Grid.List_Node[i].ToString();
-                LabelsInfoMap[i].Location = new Point(PBXFactor * Grid.List_Node[i].Location.X - (NodeSizeX / 2) +(PBXFactor / 2) + 10, PBYFactor * Grid.List_Node[i].Location.Y - (NodeSizeY / 2) + (PBYFactor / 2) + 10);
+                LabelsInfoMap[i] = new Label
+                {
+                    AutoSize = true,
+                    BackColor = Color.Transparent,
+                    Text = Grid.List_Node[i].ToString(),
+                    Location = new Point(PBXFactor * Grid.List_Node[i].Location.X - (NodeSizeX / 2) + (PBXFactor / 2) + 10, PBYFactor * Grid.List_Node[i].Location.Y - (NodeSizeY / 2) + (PBYFactor / 2) + 10)
+                };
                 LabelsInfoMap[i].Hide();
                 PictureBoxGrid.Controls.Add(LabelsInfoMap[i]);
             }
@@ -249,79 +302,77 @@ namespace ProjetSimulationReseaux
         {
             int n = Grid.List_Node.OfType<Plant>().Count();
             n += Grid.List_Node.OfType<Consumer>().Count();
-            int r, g, b;
             double h = 0;
             double DeltaHue = (double)360 / n;
-            
             for (int i = 0; i < Grid.List_Node.Count; i++)
             {
                 if (Grid.List_Node[i] is Junction)
                 {
                     continue;
                 }
-                Hsv.HsvToRgb(h, 1, 0.7, out r, out g, out b);
+                Hsv.HsvToRgb(h, 1, 0.7, out int r, out int g, out int b);
                 if (Grid.List_Node[i] is Plant)
                 {
                     ChartNode.Series.Add(new Series(Grid.List_Node[i].Name));
                     ChartNode.Series[Grid.List_Node[i].Name].ChartType = SeriesChartType.Line;
                     ChartNode.Series[Grid.List_Node[i].Name].BorderWidth = 2;
-                    ChartNode.Series[Grid.List_Node[i].Name].Color = Color.FromArgb(r , g, b);                  
+                    ChartNode.Series[Grid.List_Node[i].Name].Color = Color.FromArgb(r, g, b);
                 }
                 else if (Grid.List_Node[i] is Consumer)
                 {
                     ChartNode.Series.Add(new Series(Grid.List_Node[i].Name));
                     ChartNode.Series[Grid.List_Node[i].Name].ChartType = SeriesChartType.Line;
                     ChartNode.Series[Grid.List_Node[i].Name].BorderWidth = 2;
-                    ChartNode.Series[Grid.List_Node[i].Name].Color = Color.FromArgb(r, g, b);                 
+                    ChartNode.Series[Grid.List_Node[i].Name].Color = Color.FromArgb(r, g, b);
                 }
                 h += DeltaHue;
             }
         }
-        private void pictureBox1_PaintEdge(object sender, PaintEventArgs e)
+
+        private void PictureBox1_PaintEdge(object sender, PaintEventArgs e)
         {
             Graphics Canvas = e.Graphics;
-            Canvas.DrawLine(new Pen(Color.Black, 1), 0, 0, PictureBoxGrid.Width-1, 0);
-            Canvas.DrawLine(new Pen(Color.Black, 1), PictureBoxGrid.Width-1, 0, PictureBoxGrid.Width-1, PictureBoxGrid.Height-1);
-            Canvas.DrawLine(new Pen(Color.Black, 1), PictureBoxGrid.Width-1, PictureBoxGrid.Height-1, 0, PictureBoxGrid.Height-1);
-            Canvas.DrawLine(new Pen(Color.Black, 1), 0, PictureBoxGrid.Height-1, 0, 0);
+            Canvas.DrawLine(new Pen(Color.Black, 1), 0, 0, PictureBoxGrid.Width - 1, 0);
+            Canvas.DrawLine(new Pen(Color.Black, 1), PictureBoxGrid.Width - 1, 0, PictureBoxGrid.Width - 1, PictureBoxGrid.Height - 1);
+            Canvas.DrawLine(new Pen(Color.Black, 1), PictureBoxGrid.Width - 1, PictureBoxGrid.Height - 1, 0, PictureBoxGrid.Height - 1);
+            Canvas.DrawLine(new Pen(Color.Black, 1), 0, PictureBoxGrid.Height - 1, 0, 0);
         }
-        private void pictureBox1_PaintBaseGrid(object sender, PaintEventArgs e)
+
+        private void PictureBox1_PaintBaseGrid(object sender, PaintEventArgs e)
         {
             Graphics Canvas = e.Graphics;
             for (int i = 0; i < Grid.SizeX; i++)
             {
-                for (int j = 0; j < Grid.SizeX; j++)
+                for (int j = 0; j < Grid.SizeY; j++)
                 {
-                    Canvas.DrawEllipse(new Pen(Color.Gray, 2), PBXFactor * i + (PBXFactor/2), PBYFactor * j + (PBYFactor / 2), GridDotSizeX, GridDotSizeY);                   
+                    Canvas.DrawEllipse(new Pen(Color.Gray, 2), PBXFactor * i + (PBXFactor / 2), PBYFactor * j + (PBYFactor / 2), GridDotSizeX, GridDotSizeY);
                 }
             }
         }
-        private void pictureBox1_PaintNode(object sender, PaintEventArgs e)
+
+        private void PictureBox1_PaintNode(object sender, PaintEventArgs e)
         {
             Graphics Canvas = e.Graphics;
             Pen Pen = new Pen(Color.Black);
             foreach (Node node in Grid.List_Node)
             {
-                if(node is Junction)
+                if (node is Junction)
                 {
                     Pen.Color = Color.Black;
                     Pen.Width = NodeSizeX;
                     Canvas.DrawEllipse(Pen, PBXFactor * node.Location.X - (NodeSizeX / 2) + (PBXFactor / 2), PBYFactor * node.Location.Y - (NodeSizeY / 2) + (PBYFactor / 2), NodeSizeX, NodeSizeY);
-
                 }
                 else if (node is Plant)
                 {
                     Pen.Color = Color.Red;
                     Pen.Width = PlantSizeX;
                     Canvas.DrawEllipse(Pen, PBXFactor * node.Location.X - (PlantSizeX / 2) + (PBXFactor / 2), PBYFactor * node.Location.Y - (PlantSizeY / 2) + (PBYFactor / 2), PlantSizeX, PlantSizeY);
-
                 }
                 else if (node is Consumer)
                 {
                     Pen.Color = Color.Green;
                     Pen.Width = ConsumerSizeX;
                     Canvas.DrawEllipse(Pen, PBXFactor * node.Location.X - (ConsumerSizeX / 2) + (PBXFactor / 2), PBYFactor * node.Location.Y - (ConsumerSizeY / 2) + (PBYFactor / 2), ConsumerSizeX, ConsumerSizeY);
-
                 }
                 else
                 {
@@ -329,7 +380,8 @@ namespace ProjetSimulationReseaux
                 }
             }
         }
-        private void pictureBox1_PaintPowerLine(object sender, PaintEventArgs e)
+
+        private void PictureBox1_PaintPowerLine(object sender, PaintEventArgs e)
         {
             Graphics Canvas = e.Graphics;
             foreach (PowerLine PowerLine in Grid.List_PowerLine)
@@ -338,29 +390,32 @@ namespace ProjetSimulationReseaux
             }
         }
 
-        private void pictureBox1_MouseEnter(object sender, EventArgs e)
+        private void PictureBox1_MouseEnter(object sender, EventArgs e)
         {
-            foreach(Label label in PictureBoxGrid.Controls.OfType<Label>())
+            foreach (Label label in PictureBoxGrid.Controls.OfType<Label>())
             {
                 label.Show();
-            }           
+            }
         }
 
-        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        private void PictureBox1_MouseLeave(object sender, EventArgs e)
         {
             foreach (Label label in PictureBoxGrid.Controls.OfType<Label>())
             {
                 label.Hide();
-            }            
+            }
         }
+
         private void ButtonPlay_Click(object sender, EventArgs e)
         {
             timer1.Start();
         }
+
         private void ButtonPause_Click(object sender, EventArgs e)
         {
             timer1.Stop();
         }
+
         private void CheckBoxChart(object sender, EventArgs e)
         {
             CheckBox CheckBox = (CheckBox)sender;
@@ -375,7 +430,7 @@ namespace ProjetSimulationReseaux
             }
         }
 
-        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        private void TrackBar1_ValueChanged(object sender, EventArgs e)
         {
             TrackBar TrackBar = (TrackBar)sender;
             switch (TrackBar.Value)
@@ -383,12 +438,15 @@ namespace ProjetSimulationReseaux
                 case 0:
                     timer1.Interval = 100;
                     break;
+
                 case 1:
                     timer1.Interval = 50;
                     break;
+
                 case 2:
                     timer1.Interval = 10;
                     break;
+
                 default:
                     timer1.Interval = 50;
                     break;

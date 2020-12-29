@@ -1,29 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace ProjetSimulationReseaux
 {
     public abstract class Junction : Node
     {
         public int MaxPowerLoad;
+
         public Junction(string name, int maxPowerLoad, Point location)
         {
             Name = name;
             MaxPowerLoad = maxPowerLoad;
             Location = location;
         }
+
         public override void Update(int timePassed)
         {
-
         }
     }
 
     public class ConcentrationJunction : Junction
-    { 
+    {
         public ConcentrationJunction(string name, int maxPowerLoad, Point location) : base(name, maxPowerLoad, location)
         {
             MaxInput = 100;

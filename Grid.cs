@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetSimulationReseaux
 {
+    /// <summary>
+    /// Used to simulate the behaviour of an electrical grid.
+    /// Contain Lists of Nodes (Plants,Consumers,...) and PowerLines with their positions, also Fuels.
+    /// </summary>
     public class Grid
     {
         public int SizeX;
@@ -23,7 +24,6 @@ namespace ProjetSimulationReseaux
 
         public int TimePassed = 0;
 
-
         public Grid(int sizeX, int sizeY)
         {
             SizeX = sizeX;
@@ -38,12 +38,12 @@ namespace ProjetSimulationReseaux
         {
             foreach (Node node in List_Node)
             {
-                foreach(KeyValuePair<Node, PowerLine> inputNode in node.Dictionary_Input)
+                foreach (KeyValuePair<Node, PowerLine> inputNode in node.Dictionary_Input)
                 {
                     if (!List_PowerLine.Contains(inputNode.Value))
-                    {                      
-                        List_PowerLine.Add(inputNode.Value);                    
-                    }                     
+                    {
+                        List_PowerLine.Add(inputNode.Value);
+                    }
                 }
                 //normally useless to go through output (every node output correspond to another node input)
                 foreach (KeyValuePair<Node, PowerLine> outputNode in node.Dictionary_Output)
@@ -64,7 +64,7 @@ namespace ProjetSimulationReseaux
             TimePassed += 1;
         }
 
-        public void UpdateAllNode()
+        private void UpdateAllNode()
         {
             TotalPwProduction = 0;
             TotalPwRequest = 0;
@@ -102,40 +102,24 @@ namespace ProjetSimulationReseaux
                     {
                         dirtyPlant.Start();
                     }
-                }            
+                }
                 dirtyPlant.Update(TimePassed);
                 TotalPwProduction += dirtyPlant.PwProduction;
                 PwDeficit -= dirtyPlant.PwProduction;
                 TotalCO2Emission += dirtyPlant.CO2Emission;
                 TotalOperatingCost += dirtyPlant.OperatingCost;
             }
-            /*
-            foreach (Node node in List_Node)
-            {
-                node.Update(TimePassed);
-                if (node is Plant)
-                {
-                    Plant Plant = node as Plant;
-                    TotalPwProduction += Plant.PwProduction;
-                }
-                if (node is Consumer)
-                {
-                    Consumer Consumer = node as Consumer;
-                    TotalPwRequest += Consumer.PwRequest;
-                }
-            }
-            */
         }
 
-        public void UpdateAllFuel()
+        private void UpdateAllFuel()
         {
             foreach (Fuel Fuel in List_Fuel)
             {
                 Fuel.Update(TimePassed);
             }
         }
-        
-        public void UpdateAllPowerLine()
+
+        private void UpdateAllPowerLine()
         {
             foreach (PowerLine PowerLine in List_PowerLine)
             {
@@ -143,19 +127,10 @@ namespace ProjetSimulationReseaux
             }
         }
 
-        public void AddPlant(Plant plant)
-        {
-            List_Node.Add(plant);
-        }
 
         public void AddFuel(Fuel fuel)
         {
             List_Fuel.Add(fuel);
-        }
-
-        public void AddConsumer(Consumer consumer)
-        {
-            List_Node.Add(consumer);
         }
 
         public void AddNode(Node node)
@@ -163,9 +138,5 @@ namespace ProjetSimulationReseaux
             List_Node.Add(node);
         }
 
-        public void AddPowerLine(PowerLine powerLine)
-        {
-            List_PowerLine.Add(powerLine);
-        }
     }
 }

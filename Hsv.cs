@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetSimulationReseaux
 {
@@ -42,7 +38,6 @@ namespace ProjetSimulationReseaux
                 double tv = V * (1 - S * (1 - f));
                 switch (i)
                 {
-
                     // Red is the dominant color
 
                     case 0:
@@ -58,6 +53,7 @@ namespace ProjetSimulationReseaux
                         G = V;
                         B = pv;
                         break;
+
                     case 2:
                         R = pv;
                         G = V;
@@ -71,6 +67,7 @@ namespace ProjetSimulationReseaux
                         G = qv;
                         B = V;
                         break;
+
                     case 4:
                         R = tv;
                         G = pv;
@@ -92,6 +89,7 @@ namespace ProjetSimulationReseaux
                         G = tv;
                         B = pv;
                         break;
+
                     case -1:
                         R = V;
                         G = pv;
