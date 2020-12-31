@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ProjetSimulationReseaux
+﻿namespace ProjetSimulationReseaux
 {
     public interface IMarket
     {

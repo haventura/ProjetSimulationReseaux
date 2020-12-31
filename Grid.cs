@@ -4,8 +4,9 @@ using System.Linq;
 namespace ProjetSimulationReseaux
 {
     /// <summary>
-    /// Used to simulate the behaviour of an electrical grid.
+    /// Simulate the behaviour of an electrical grid.
     /// Contain Lists of Nodes (Plants,Consumers,...) and PowerLines with their positions, also Fuels.
+    /// See <see cref="Node"/>, <see cref="Plant"/>, <see cref="Consumer"/>, <see cref="Fuel"/>, <see cref="PowerLine"/>.
     /// </summary>
     public class Grid
     {
@@ -24,6 +25,11 @@ namespace ProjetSimulationReseaux
 
         public int TimePassed = 0;
 
+        /// <summary>
+        /// Simulate the behaviour of an electrical grid.
+        /// Contain Lists of Nodes (Plants,Consumers,...) and PowerLines with their positions, also Fuels.
+        /// See <see cref="Node"/>, <see cref="Plant"/>, <see cref="Consumer"/>, <see cref="Fuel"/>, <see cref="PowerLine"/>.
+        /// </summary>
         public Grid(int sizeX, int sizeY)
         {
             SizeX = sizeX;
@@ -34,6 +40,10 @@ namespace ProjetSimulationReseaux
             List_PowerLine = new List<PowerLine>();
         }
 
+        /// <summary>
+        /// Add all the power lines with corresponding max load to the grid based on the connected nodes already in the grid.
+        /// Called only once after all the nodes have been added and linked.
+        /// </summary>
         public void AddAllPowerLine()
         {
             foreach (Node node in List_Node)
@@ -45,7 +55,7 @@ namespace ProjetSimulationReseaux
                         List_PowerLine.Add(inputNode.Value);
                     }
                 }
-                //normally useless to go through output (every node output correspond to another node input)
+                //normally useless to go through output (every node output correspond to another node input which have amready been linked) but you never know...
                 foreach (KeyValuePair<Node, PowerLine> outputNode in node.Dictionary_Output)
                 {
                     if (!List_PowerLine.Contains(outputNode.Value))
@@ -56,6 +66,9 @@ namespace ProjetSimulationReseaux
             }
         }
 
+        /// <summary>
+        /// Updates all the element in the grid, Fuels, Nodes and powerLine and increment time passed by 1.
+        /// </summary>
         public void Update()
         {
             UpdateAllFuel();
@@ -64,6 +77,12 @@ namespace ProjetSimulationReseaux
             TimePassed += 1;
         }
 
+        /// <summary>
+        /// Updates, in order, every Consumer and adds up each of their power request, then updates the plant and substract their power production from the total request.
+        /// If the power production is too low/high, adjust the targeted power of the Plants.
+        /// Also gather CO2 emission and operating cost.
+        /// Junction and PowerLine are not implemented (yet...).
+        /// </summary>
         private void UpdateAllNode()
         {
             TotalPwProduction = 0;
@@ -83,7 +102,7 @@ namespace ProjetSimulationReseaux
                 PwDeficit -= greenPlant.PwProduction;
                 TotalOperatingCost += greenPlant.OperatingCost;
             }
-            foreach (DirtyPlant dirtyPlant in List_Node.OfType<DirtyPlant>())
+            foreach (FueledPlant dirtyPlant in List_Node.OfType<FueledPlant>())
             {
                 if (dirtyPlant.IsOn)
                 {
@@ -111,6 +130,9 @@ namespace ProjetSimulationReseaux
             }
         }
 
+        /// <summary>
+        /// Updates each Fuel of the grid .
+        /// </summary>
         private void UpdateAllFuel()
         {
             foreach (Fuel Fuel in List_Fuel)
@@ -119,6 +141,9 @@ namespace ProjetSimulationReseaux
             }
         }
 
+        /// <summary>
+        /// Updates each PowerLines of the grid (not implemented).
+        /// </summary>
         private void UpdateAllPowerLine()
         {
             foreach (PowerLine PowerLine in List_PowerLine)
@@ -127,16 +152,20 @@ namespace ProjetSimulationReseaux
             }
         }
 
-
+        /// <summary>
+        /// Add a Fuel object (Coal, Gas, Uranium, ...) to the grid.
+        /// </summary>
         public void AddFuel(Fuel fuel)
         {
             List_Fuel.Add(fuel);
         }
 
+        /// <summary>
+        /// Add a Node object (Plant, Consumer, Junction, ...) to the grid.
+        /// </summary>
         public void AddNode(Node node)
         {
             List_Node.Add(node);
         }
-
     }
 }

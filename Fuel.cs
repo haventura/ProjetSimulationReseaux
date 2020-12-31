@@ -2,23 +2,34 @@
 
 namespace ProjetSimulationReseaux
 {
+    /// <summary>
+    /// The abstract Fuel Super-Class. Implement the IMarket Interface.
+    /// See <see cref="Grid"/>, <see cref="FueledPlant"/>, <see cref="IMarket"/>.
+    /// </summary>
     public abstract class Fuel : IMarket
     {
-        internal double BasePrice;    //$/uF
+        internal double BasePrice;
         public string Name;
-        public double CurrentPrice; //$/uF
-        public double PwDensity;    //MW/uF
-        public double CO2Density;   //CO2/uF
+        public double CurrentPrice;
+        public double PwDensity;
+        public double CO2Density;
         private static readonly Random Random = new Random();
 
-        public double RandomValue { get; set; }
+        internal double RandomValue { get; set; }
         public double PriceFactor { get; set; } = 1;
 
+        /// <summary>
+        /// The abstract Fuel Super-Class. Implement the IMarket Interface.
+        /// See <see cref="Grid"/>, <see cref="FueledPlant"/>, <see cref="IMarket"/>.
+        /// </summary>
         public Fuel(string name)
         {
             Name = name;
         }
 
+        /// <summary>
+        /// Apply a small random variation on the price of the Fuel.
+        /// </summary>
         public void RandomizePriceFactor()
         {
             RandomValue = Random.NextDouble();
@@ -41,7 +52,7 @@ namespace ProjetSimulationReseaux
         }
 
         public void Update(int timePassed)
-        {          
+        {
             UpdatePrice(timePassed);
         }
 
@@ -50,42 +61,79 @@ namespace ProjetSimulationReseaux
             RandomizePriceFactor();
             CurrentPrice = BasePrice * PriceFactor;
         }
+
         public override string ToString()
         {
             return Name;
         }
     }
 
+    /// <summary>
+    /// Used to fuel CoalPlant, inherit from the Fuel class.
+    /// Price varies randomly over time.
+    /// Low price and power density per unit, but polute enormously.
+    /// See <see cref="Grid"/>, <see cref="Fuel"/>, <see cref="CoalPlant"/>, <see cref="IMarket"/>.
+    /// </summary>
     public class Coal : Fuel
     {
+        /// <summary>
+        /// Used to fuel CoalPlant, inherit from the Fuel class.
+        /// Price varies randomly over time.
+        /// Low price and power density per unit, but polute enormously.
+        /// See <see cref="Grid"/>, <see cref="Fuel"/>, <see cref="CoalPlant"/>, <see cref="IMarket"/>.
+        /// </summary>
         public Coal(string name) : base(name)
         {
-            BasePrice = 1;      //$/uF
-            CurrentPrice = 0;       //$/uF
-            PwDensity = 2.5;    //MW/uF
-            CO2Density = 3;   //CO2/uF
+            BasePrice = 1;
+            CurrentPrice = 0;
+            PwDensity = 2.5;
+            CO2Density = 3;
         }
     }
 
+    /// <summary>
+    /// Used to fuel GasPlant, inherit from the Fuel class.
+    /// Price varies randomly over time.
+    /// moderate price and power density per unit, and moderate polution.
+    /// See <see cref="Grid"/>, <see cref="Fuel"/>, <see cref="GasPlant"/>, <see cref="IMarket"/>.
+    /// </summary>
     public class Gas : Fuel
     {
+        /// <summary>
+        /// Used to fuel GasPlant, inherit from the Fuel class.
+        /// Price varies randomly over time.
+        /// moderate price and power density per unit, and moderate polution.
+        /// See <see cref="Grid"/>, <see cref="Fuel"/>, <see cref="GasPlant"/>, <see cref="IMarket"/>.
+        /// </summary>
         public Gas(string name) : base(name)
         {
-            BasePrice = 2.5;      //$/uF
-            CurrentPrice = 0;       //$/uF
-            PwDensity = 5;    //MW/uF
-            CO2Density = 1;   //CO2/uF
+            BasePrice = 2.5;
+            CurrentPrice = 0;
+            PwDensity = 5;
+            CO2Density = 1;
         }
     }
 
+    /// <summary>
+    /// Used to fuel UraniumPlant, inherit from the Fuel class.
+    /// Price varies randomly over time.
+    /// Very high price and power density per unit, doesn't polute.
+    /// See <see cref="Grid"/>, <see cref="Fuel"/>, <see cref="UraniumPlant"/>, <see cref="IMarket"/>.
+    /// </summary>
     public class Uranium : Fuel
     {
+        /// <summary>
+        /// Used to fuel UraniumPlant, inherit from the Fuel class.
+        /// Price varies randomly over time.
+        /// Very high price and power density per unit, doesn't polute.
+        /// See <see cref="Grid"/>, <see cref="Fuel"/>, <see cref="UraniumPlant"/>, <see cref="IMarket"/>.
+        /// </summary>
         public Uranium(string name) : base(name)
         {
-            BasePrice = 150;      //$/uF
-            CurrentPrice = 0;       //$/uF
-            PwDensity = 1000;    //MW/uF
-            CO2Density = 0;   //CO2/uF
+            BasePrice = 150;
+            CurrentPrice = 0;
+            PwDensity = 1000;
+            CO2Density = 0;
         }
     }
 }

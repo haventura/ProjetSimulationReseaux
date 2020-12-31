@@ -2,10 +2,15 @@
 
 namespace ProjetSimulationReseaux
 {
+    /// <summary>
+    /// A power line used to link two nodes together, caracterised by its max load, start position and end position.
+    /// Not implemented.
+    /// See <see cref="Grid"/>, <see cref="Node"/>.
+    /// </summary>
     public class PowerLine
     {
-        public int MaxPowerLoad;
-        public int CurrentPowerLoad;
+        protected int MaxPowerLoad;
+        protected int CurrentPowerLoad;
         public Point StartLocation;
         public Point EndLocation;
 

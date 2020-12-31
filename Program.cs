@@ -7,7 +7,8 @@ namespace ProjetSimulationReseaux
     internal static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// ECAM - 3BE - Projet POO - December 2020
+        /// Author : Andrea Ventura.
         /// </summary>
         [STAThread]
         private static void Main()

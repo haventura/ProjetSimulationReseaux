@@ -14,7 +14,9 @@ namespace ProjetSimulationReseaux
     /// Only used to update the Grid object and display the data,
     /// doesn't compute any data itself.
     /// Inherit from the Form Object.
+    /// See <see cref="ProjetSimulationReseaux.Grid"/>.
     /// </summary>
+    ///
     public partial class ControlCenter : Form
     {
         private readonly Grid Grid;
@@ -31,6 +33,16 @@ namespace ProjetSimulationReseaux
         private readonly int GridDotSizeX;
         private readonly int GridDotSizeY;
 
+        /// <summary>
+        /// A Graphical UI that takes a Grid object as parameters.
+        /// Displays various information about said Grid in a windows Form window,
+        /// including the location of plants/consumers, graphs of production/consumption
+        /// and various data about the nodes of the Grid.
+        /// Only used to update the Grid object and display the data,
+        /// doesn't compute any data itself.
+        /// Inherit from the Form Object.
+        /// See <see cref="ProjetSimulationReseaux.Grid"/>.
+        /// </summary>
         public ControlCenter(Grid grid)
         {
             Grid = grid;
@@ -58,6 +70,9 @@ namespace ProjetSimulationReseaux
             Update();
         }
 
+        /// <summary>
+        /// Updates the chart displaying data on the Form.
+        /// </summary>
         private void UpdateAllChart()
         {
             if (Grid.TimePassed > 200)
@@ -94,6 +109,9 @@ namespace ProjetSimulationReseaux
             ChartNode.ResetAutoValues();
         }
 
+        /// <summary>
+        /// Updates the labels displaying data on the Form.
+        /// </summary>
         private void UpdateAllLabel()
         {
             int i = 0;
@@ -127,6 +145,9 @@ namespace ProjetSimulationReseaux
             }
         }
 
+        /// <summary>
+        /// Runs once when the Windows Form is loaded.
+        /// </summary>
         private void ControlCenter_Load(object sender, EventArgs e)
         {
             DrawAll();
@@ -144,6 +165,9 @@ namespace ProjetSimulationReseaux
             }
         }
 
+        /// <summary>
+        /// Draws the grid on the Windows Form.
+        /// </summary>
         private void DrawAll()
         {
             PictureBoxGrid.Paint += new PaintEventHandler(PictureBox1_PaintEdge);
@@ -152,6 +176,9 @@ namespace ProjetSimulationReseaux
             PictureBoxGrid.Paint += new PaintEventHandler(PictureBox1_PaintNode);
         }
 
+        /// <summary>
+        /// Adds the data labels on the Windows Form.
+        /// </summary>
         private void AddLabelInfoTable()
         {
             int PlantTotalCount = Grid.List_Node.OfType<Plant>().Count();
@@ -242,6 +269,9 @@ namespace ProjetSimulationReseaux
             }
         }
 
+        /// <summary>
+        /// Adds checkbox to each Nodes to toggle the display of that Node on the Node chart
+        /// </summary>
         private void AddCheckBoxInfoTable()
         {
             int PlantTotalCount = Grid.List_Node.OfType<Plant>().Count();
@@ -279,6 +309,9 @@ namespace ProjetSimulationReseaux
             }
         }
 
+        /// <summary>
+        /// Adds the names of the Nodes on the "map" on the Windows Form (only seen when hovering the map with the mouse cursor).
+        /// </summary>
         private void AddLabelInfoMap()
         {
             int m = Grid.List_Node.Count;
@@ -298,6 +331,11 @@ namespace ProjetSimulationReseaux
             }
         }
 
+        /// <summary>
+        /// Adds each Nodes as a series on the Node Chart (done once).
+        /// This allows us to automatically update the content of the chart if new Nodes are added/removed.
+        /// Note the genius trick i used to make every series a different color over the whole r,g,b spectrum :D.
+        /// </summary>
         private void FillChartNode()
         {
             int n = Grid.List_Node.OfType<Plant>().Count();

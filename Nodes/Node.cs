@@ -4,6 +4,15 @@ using System.Drawing;
 
 namespace ProjetSimulationReseaux
 {
+    /// <summary>
+    /// The Node Super-Class. Every Node on the grid derive from this class.
+    /// Implement the IWeather interface.
+    /// Caracterised by a name, location, and the maximum number of inputs and outputs it can have.
+    /// Each Node as a dictionnary containing its input with the power Line linking the two, and another dictionnary for the output, with the power line too.
+    /// See <see cref="Plant"/>, <see cref="Consumer"/>, <see cref="IWeather"/>.
+    /// </summary>
+    ///
+
     public abstract class Node : IWeather
     {
         public double SunPercentage { get; set; }
@@ -13,9 +22,15 @@ namespace ProjetSimulationReseaux
         public Point Location;
         public Dictionary<Node, PowerLine> Dictionary_Input = new Dictionary<Node, PowerLine>();
         public Dictionary<Node, PowerLine> Dictionary_Output = new Dictionary<Node, PowerLine>();
-        public int MaxInput;
-        public int MaxOutput;
+        protected int MaxInput;
+        protected int MaxOutput;
 
+        /// <summary>
+        /// Add an input Node to the selected Node and create a PowerLine with the stated max load linking the two.
+        /// The input Node will also have the selected Node added as an output.
+        /// Skipped if the two Nodes are already linked.
+        /// See <see cref="Plant"/>, <see cref="Consumer"/>.
+        /// </summary>
         public void AddInput(Node linkedNode, int powerLineMaxLoad)
         {
             if (Dictionary_Input.Count < MaxInput && !Dictionary_Input.ContainsKey(linkedNode))
@@ -35,6 +50,11 @@ namespace ProjetSimulationReseaux
             }
         }
 
+        /// <summary>
+        /// Add an output Node to the selected Node and create a PowerLine with the stated max load linking the two.
+        /// The output Node will also have the selected Node added as an input.
+        /// Skipped if the two Nodes are already linked.
+        /// </summary>
         public void AddOutput(Node linkedNode, int powerLineMaxLoad)
         {
             if (Dictionary_Output.Count < MaxOutput && !Dictionary_Output.ContainsKey(linkedNode))
@@ -76,8 +96,14 @@ namespace ProjetSimulationReseaux
             CalculateTemperaturePercent(timePassed);
         }
 
+        /// <summary>
+        /// Update the concerned Node based on the time passed.
+        /// </summary>
         public abstract void Update(int timePassed);
 
+        /// <summary>
+        /// Return the name of the Node.
+        /// </summary>
         public override string ToString()
         {
             return Name;
