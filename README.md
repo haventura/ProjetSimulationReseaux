@@ -11,6 +11,18 @@ The platform offer a series of classes allowing researchers to build their own n
 <img src="img/Simulation.gif" alt="The graphical UI" height="600">
 </p>
 
+## Class Diagram
+
+
+
+
+
+## Sequence Diagram
+
+
+
+
+
 ## Contributor
 
 Andrea Ventura, student at ECAM Brussels Engineering School.
