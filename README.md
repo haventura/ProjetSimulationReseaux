@@ -4,7 +4,7 @@
 
 ## Images
 
-![An image](img/ControlCenter.png)
+![An image](img/ControlCenter.png =300x)
 
 ## Author
 
