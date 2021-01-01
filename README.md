@@ -4,7 +4,7 @@
 
 ## Images
 
-![An image](img/ControlCenter.png =300x)
+<img src="img/ControlCenter.png" alt="The graphical UI" height="400">
 
 ## Author
 
