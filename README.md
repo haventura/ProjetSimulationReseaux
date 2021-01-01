@@ -8,13 +8,13 @@ The platform offer a series of classes allowing researchers to build their own n
 ## Graphical User Interface
 
 <p align="center">
-<img src="img/Simulation.gif" alt="The graphical UI" height="600">
+<img src="img/Simulation.gif" alt="The graphical UI">
 </p>
 
 ## Class Diagram
 
 <p align="center">
-<img src="img/Class Diagram.png" alt="The Class Diagram" height="600">
+<img src="img/Class Diagram.png" alt="The Class Diagram">
 </p>
 
 
