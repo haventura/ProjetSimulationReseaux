@@ -1,4 +1,4 @@
-# ProjetSimulationReseaux
+# POO - Simulateur de réseaux électrique
 
 
 
