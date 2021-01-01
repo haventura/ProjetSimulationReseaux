@@ -8,7 +8,7 @@
 <img src="img/ControlCenter.png" alt="The graphical UI" height="600">
 </p>
 
-## Author
+## Contributor
 
 Andrea Ventura, student at ECAM Brussels Engineering School.
 
