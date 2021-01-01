@@ -4,7 +4,9 @@
 
 ## Images
 
-<img src="img/ControlCenter.png" alt="The graphical UI" height="400">
+<p align="center">
+<img src="img/ControlCenter.png" alt="The graphical UI" height="600">
+</p>
 
 ## Author
 
