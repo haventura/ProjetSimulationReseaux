@@ -4,7 +4,7 @@
 
 ## Images
 
-
+![An image](img/ControlCenter.png)
 
 ## Author
 
