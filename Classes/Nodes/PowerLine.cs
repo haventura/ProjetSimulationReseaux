@@ -9,8 +9,8 @@ namespace ProjetSimulationReseaux
     /// </summary>
     public class PowerLine
     {
-        protected int MaxPowerLoad;
-        protected int CurrentPowerLoad;
+        public int MaxPowerLoad;
+        public int CurrentPowerLoad;
         public Point StartLocation;
         public Point EndLocation;
 
