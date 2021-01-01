@@ -8,7 +8,7 @@ This platform offer a series of classes allowing researchers to build their own 
 ## Images
 
 <p align="center">
-<img src="img/ControlCenter.png" alt="The graphical UI" height="600">
+<img src="img/Simulation.gif" alt="The graphical UI" height="600">
 </p>
 
 ## Contributor
