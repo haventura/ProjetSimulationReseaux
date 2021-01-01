@@ -48,23 +48,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hsv.cs" />
+    <Compile Include="Classes\Hsv.cs" />
     <Compile Include="Interfaces\IMarket.cs" />
     <Compile Include="Interfaces\IWeather.cs" />
-    <Compile Include="Nodes\Node.cs" />
-    <Compile Include="Nodes\Junction.cs" />
-    <Compile Include="Grid.cs" />
-    <Compile Include="Nodes\Consumer.cs" />
+    <Compile Include="Classes\Nodes\Node.cs" />
+    <Compile Include="Classes\Nodes\Junction.cs" />
+    <Compile Include="Classes\Grid.cs" />
+    <Compile Include="Classes\Nodes\Consumer.cs" />
     <Compile Include="ControlCenter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ControlCenter.Designer.cs">
       <DependentUpon>ControlCenter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fuel.cs" />
-    <Compile Include="Nodes\Plant.cs" />
-    <Compile Include="Nodes\PowerLine.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Classes\Fuel.cs" />
+    <Compile Include="Classes\Nodes\Plant.cs" />
+    <Compile Include="Classes\Nodes\PowerLine.cs" />
+    <Compile Include="Classes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ControlCenter.resx">
       <DependentUpon>ControlCenter.cs</DependentUpon>
