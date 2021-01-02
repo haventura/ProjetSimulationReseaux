@@ -45,4 +45,12 @@ This Sequence Diagram gives a preview of the most important functionality of the
 ## Contributor
 
 Andrea Ventura, student at ECAM Brussels Engineering School.
-http://www.ecam.be
+<p align="center">
+  
+  <a href="http://www.ecam.be"></a>
+  <a href="http://www.ecam.be">
+    <img src="img/Sequence Diagram.png" alt="The Sequence Diagram" width="400"><br/>
+  </a>
+  
+</p>
+
