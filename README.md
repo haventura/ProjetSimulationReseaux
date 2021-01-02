@@ -35,7 +35,11 @@ Here is presented the Class Diagram of the classes included in the platform. Let
 
 ## Sequence Diagram
 
-This Sequence Diagram gives a preview of the most important functionality of the platform, the regulation of the plants power production based on the consumers power request.
+This Sequence Diagram gives a (shortened) preview of the most important functionality of the platform, the regulation of the plants power production based on the consumers power request. Here is an overview of this procedure:
+- At each update cycle, defined by a timer linked to the ConctrolCenter, the ControlCenter send an update command to its linked Grid object.
+- The Grid then first goes trough all of its Consumer type nodes and updates them, and fetch each of their requested power, wich are added in a separate variable (PowerDeficit).
+- After the Consumers, the Grids goes trough all its Plant type nodes and again sends them an update command. After this update, the Grid check wether or not the Plant minimum power production is higher than the current total power deficit of the Grid. If it is the case, the Grid sends a targeted power production to the Plant, equals to the power deficit (the power production of the plant is capped and will max out at this maximum value, there are no surcharge possible). Note that the Plant takes several cycle to adapt its power production to its target, based on its ramping factor. If the minimum power production of the Plant is higher than the deficit, the Plant is turned off. The Grid then fetch the actual power production of the Plant and substract it from the power deficit obtrained earlier from all the Consumers. The grid also fetch additional information such as the CO2 emission and operating cost of the plant.
+- Once the Grid has finished updating its nodes and has gathered all the relevant information, the ControlCenter fetch these information to display them on the GUI of the platform. 
 
 <p align="center">
   <img src="img/Sequence Diagram.png" alt="The Sequence Diagram" width="400"><br/>
