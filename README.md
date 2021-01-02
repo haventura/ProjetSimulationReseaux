@@ -49,7 +49,7 @@ Andrea Ventura, student at ECAM Brussels Engineering School.
   
   <a href="http://www.ecam.be"></a>
   <a href="http://www.ecam.be">
-    <img src="img/Sequence Diagram.png" alt="The Sequence Diagram" width="400"><br/>
+    <img src="img/EcamLogo.png" alt="ECAM Brussels Engineering School" width="300"><br/>
   </a>
   
 </p>
