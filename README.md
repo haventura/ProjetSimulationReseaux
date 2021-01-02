@@ -46,11 +46,9 @@ This Sequence Diagram gives a preview of the most important functionality of the
 
 Andrea Ventura, student at ECAM Brussels Engineering School.
 <p align="center">
-  
-  <a href="http://www.ecam.be"></a>
+  <a href="http://www.ecam.be">www.ecam.be</a>
   <a href="http://www.ecam.be">
-    <img src="img/EcamLogo.jpg" alt="ECAM Brussels Engineering School" width="300"><br/>
-  </a>
-  
+    <img src="img/EcamLogo.jpg" alt="ECAM Brussels Engineering School" width="250"><br/>
+  </a> 
 </p>
 
