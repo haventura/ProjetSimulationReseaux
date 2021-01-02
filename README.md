@@ -19,13 +19,12 @@ The platform offer a series of classes allowing researchers to build their own n
   <em>Click the image for full resolution</em>
 </p>
 
-
-
 ## Sequence Diagram
 
-
-
-
+<p align="center">
+  <img src="img/Sequence Diagram.png" alt="The Sequence Diagram" width="700"><br/>
+  <em>Click the image for full resolution</em>
+</p>
 
 ## Contributor
 
