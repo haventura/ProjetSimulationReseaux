@@ -45,5 +45,4 @@ This Sequence Diagram gives a preview of the most important functionality of the
 ## Contributor
 
 Andrea Ventura, student at ECAM Brussels Engineering School.
-
-##
+http://www.ecam.be
