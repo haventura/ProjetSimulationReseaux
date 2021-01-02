@@ -18,11 +18,15 @@ At the top left is a map of the nodes of the grid with coordinate <0,0> at the t
 
 ## Class Diagram
 
-Here is presented the Class Diagram of the classes of the platform. Let start with a few remarks:
-- First item
-- Second item
-- Third item
-- Fourth item
+Here is presented the Class Diagram of the classes included in the platform. Lets go trough this diagram in steps:
+- The two main components of our platform are the ControlCenter and the Grid object. The ControlCenter aggregate a Grid object and display its information, as explained in the GUI section above. The Grid itself is an aggregation of many differents Node object, PowerLine, and Fuel. It gather the relevant informations about these object on a timely basis and updates them accordingly.
+- The bottom half part of our diagram is occupied by the Node Super-Class and all the sub-Classes inheriting from it. A Node can be any object located at a point on the grid and taking part in its simulation. Here we have created a few basic implementation of this Node Super-Class, wich are:
+  -Plants, feeding the Grid with electrical power.
+  -Consumer, drawing power from the grid.
+  -Junction, wich are used to link together several Nodes and concentrate/distribute power from/along many power lines.
+- There are two Interfaces included in the platform; IMarket, implemented by the Fuel class, which randomize the price value of the Fuel object over time, and IWeather, implemented by the Node class, wich provide each Node object with a few weather parameters such as sunshine and wind.
+- The Junction and PowerLine Classes do not have any functionnal implementation, they are just provided for graphical purposes.
+- The classes and most of the important methods of the platform come with a little description of their function in the program files.
 
 <p align="center">
   <img src="img/Class Diagram.png" alt="The Class Diagram" width="700"><br/>
@@ -30,6 +34,8 @@ Here is presented the Class Diagram of the classes of the platform. Let start wi
 </p>
 
 ## Sequence Diagram
+
+This Sequence Diagram gives a preview of the most important functionality of the platform, the regulation of the plants power production based on the consumers power request.
 
 <p align="center">
   <img src="img/Sequence Diagram.png" alt="The Sequence Diagram" width="400"><br/>
