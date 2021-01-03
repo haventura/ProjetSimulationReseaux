@@ -45,7 +45,7 @@ This Sequence Diagram gives a (shortened) preview of the most important function
 
 <p align="center">
   <img src="img/Sequence Diagram.png" alt="The Sequence Diagram" width="400"><br/>
-  <em>The Sequence Diagramme of the auto-regulation of the grid. Click the image for full resolution</em>
+  <em>The Grid auto-regulation process. Click the image for full resolution</em>
 </p>
 
 ## Contributor
