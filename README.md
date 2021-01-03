@@ -15,7 +15,7 @@ At runtime, the exemple program available in the files run this window, displayi
 
 <p align="center">
   <img src="img/Simulation.gif" alt="The graphical UI" width="700"><br/>
-  <em>Click the image for full resolution</em>
+  <em>The GUI of the platform, with an example program running. Click the image for full resolution</em>
 </p>
 
 ## Class Diagram
@@ -28,11 +28,11 @@ Here is presented the Class Diagram of the classes included in the platform. Let
   -Junction, wich are used to link together several Nodes and concentrate/distribute power from/along many power lines.
 - There are two Interfaces included in the platform; IMarket, implemented by the Fuel class, which randomize the price value of the Fuel object over time, and IWeather, implemented by the Node class, wich provide each Node object with a few weather parameters such as sunshine and wind.
 - The Junction and PowerLine Classes do not have any functionnal implementation, they are just provided for graphical purposes.
-- The classes and most of the important methods of the platform come with a little description of their function in the program files.
+- The classes and most of the important methods of the platform come with a short description of their function in the program files.
 
 <p align="center">
   <img src="img/Class Diagram.png" alt="The Class Diagram" width="700"><br/>
-  <em>Click the image for full resolution</em>
+  <em>The Class Diagram of the platform. Click the image for full resolution</em>
 </p>
 
 ## Sequence Diagram
@@ -45,14 +45,13 @@ This Sequence Diagram gives a (shortened) preview of the most important function
 
 <p align="center">
   <img src="img/Sequence Diagram.png" alt="The Sequence Diagram" width="400"><br/>
-  <em>Click the image for full resolution</em>
+  <em>The Sequence Diagramme of the auto-regulation of the grid. Click the image for full resolution</em>
 </p>
 
 ## Contributor
 
 Andrea Ventura, student at ECAM Brussels Engineering School.
-<p align="center">
-  
+<p align="center">  
   <a href="http://www.ecam.be">
     <img src="img/EcamLogo.jpg" alt="ECAM Brussels Engineering School" width="250">
   </a><br/> 
