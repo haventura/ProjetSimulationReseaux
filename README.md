@@ -50,7 +50,7 @@ This Sequence Diagram gives a (shortened) preview of the most important function
 
 ## Contributor
 
-Andrea Ventura, student at ECAM Brussels Engineering School. 
+Andrea Ventura, student at ECAM Brussels Engineering School.  
 <20283@ecam.be>
 <p align="center">  
   <a href="http://www.ecam.be">
