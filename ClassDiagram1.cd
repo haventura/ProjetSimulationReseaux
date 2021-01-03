@@ -45,7 +45,6 @@
       <HashCode>BAQAAAAAAAAiAAAEAAAAAAQAAAJABAAAQAABAAAAAAA=</HashCode>
       <FileName>Classes\Fuel.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ProjetSimulationReseaux.Coal">
     <Position X="10" Y="0.5" Width="1.5" />
@@ -142,7 +141,6 @@
       <HashCode>AAQKAAAIAAABAACMAAIAAAQEAAABAIBAEAAAAAQAgAA=</HashCode>
       <FileName>Classes\Nodes\Node.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="1.055" />
   </Class>
   <Class Name="ProjetSimulationReseaux.Plant">
     <Position X="7.75" Y="11" Width="1.5" />
